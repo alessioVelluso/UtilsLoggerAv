@@ -2,7 +2,7 @@
 
 
 
-`v3.2.0`
+`v3.2.1`
 
 This is a package i made for myself but can surely be helpful to others, feel free to contribute if you like it.
 
@@ -23,8 +23,8 @@ You basically have the **Logger** class and the **FW** (filewriter) class.
 
 ```ts
 export interface ILogger {
-    protected colors:Record<LogColors, string>;
-    protected icons:Record<Icons, string>;
+    public static colors:Record<LogColors, string>;
+    public static icons:Record<Icons, string>;
 
     getStringedColor: (color:LogColors, message:any) => string;
     ok: (message:string) => void;

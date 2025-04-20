@@ -1,11 +1,8 @@
-import { FW, Logger } from "utils-logger-av";
-
-// --- Logger
-// log.logFile("Ciao");
-// log.logFile("Sono un errore", "error");
-
-import { LogColors } from "utils-logger-av";
+import { FW, LogColors, Logger } from 'utils-logger-av';
 import { c, Configs, i, log } from "./utils";
+
+log.baseFile("Ciao", "log");
+log.baseFile("Sono un errore", "error");
 
 log.gold("If you specify a \"logFilePath\" in the constructor, you can use the \"logFileFunctions\"");
 log.logFile("Hello world!");
