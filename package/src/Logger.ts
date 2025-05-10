@@ -222,6 +222,8 @@ export default class Logger implements ILogger
 
     logFile = (message:string, type:FileLogType = "log") =>
     {
+        if (!this.logFilePath) return;
+
         if (!existsSync(this.logFilePath))
         {
             const fullPath = path.resolve(this.logFilePath);
