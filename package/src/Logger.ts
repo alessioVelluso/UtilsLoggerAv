@@ -41,7 +41,7 @@ export const getStringedColor = (color:LogColors, message:any) => {
 
 export default class Logger implements ILogger
 {
-    private readonly logFilePath:string = null!;
+    protected logFilePath:string = null!;
     private readonly isDebug:boolean = true;
     protected readonly dateLocale:DateLocales = "it-IT";
     protected readonly primaryColor:LogColors | null = null;

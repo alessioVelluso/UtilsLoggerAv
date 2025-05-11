@@ -2,7 +2,7 @@
 
 
 
-`v3.2.2`
+`v3.2.3`
 
 This is a package i made for myself but can surely be helpful to others, feel free to contribute if you like it.
 
@@ -55,7 +55,7 @@ export interface ILogger {
 }
 
 // --- Default constructor values
-private readonly logFilePath:string = null!;
+private logFilePath:string = null!;
 private readonly isDebug:boolean = true;
 protected readonly dateLocale:DateLocales = "it-IT";
 protected readonly primaryColor:LogColors | null = null;
