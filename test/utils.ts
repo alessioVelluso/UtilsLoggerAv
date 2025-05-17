@@ -1,4 +1,4 @@
-import { FileLogType, Logger, getStringedColor } from "utils-logger-av";
+import { Logger, getStringedColor } from "utils-logger-av";
 
 export class Configs
 {
@@ -15,9 +15,16 @@ export class Configs
 // (you can obviously avoid to create a class extending mine)
 class MyLogger extends Logger
 {
-    public baseFile = (message:any, type:FileLogType) => {
-        this.base(message);
-        this.logFile(message, type)
+    override fullNok(...errs: any[]): void
+    {
+        this.detail("Overriding fullNok and printing filePath: ", this.logFilePath);
+        super.fullNok(...errs);
+    }
+
+    public loggingAllIcons()
+    {
+        this.combo(['teal', 'Printing all the icons...'])
+        for (const icon in Logger.icons) this.detail(`${icon} ${(Logger.icons as Record<string, any>)[icon]}`)
     }
 }
 

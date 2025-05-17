@@ -1,4 +1,5 @@
-[24/01/2025 22:17:06]		  LOG:  Hello world!
-[24/01/2025 22:17:06]		ERROR:  You cannot love this library!
-[24/01/2025 22:40:33]		  LOG:  Hello world!
-[24/01/2025 22:40:33]		ERROR:  You cannot love this library!
+[17/05/2025 21:55:23]		  LOG:  Hello world!
+[17/05/2025 21:55:23]		ERROR:  Hope you like this library!
+[17/05/2025 21:55:23]		  LOG:  ✅  This is the same but writing in a file too through the "logFilePath" property
+[17/05/2025 21:55:23]		ERROR:  ❌ This is the same but writing in a file too through the "logFilePath" property
+[17/05/2025 21:55:23]		ERROR:  ❌ TEST The logError method manage the error message and the stacks in an error

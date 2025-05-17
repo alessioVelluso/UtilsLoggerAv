@@ -1,6 +1,6 @@
 {
   "name": "utils-logger-av",
-  "version": "3.2.3",
+  "version": "4.0.0",
   "author": "Alessio Velluso",
   "license": "MIT",
   "description": "Backend colored logs",

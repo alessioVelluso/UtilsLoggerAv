@@ -1,4 +1,5 @@
 import { appendFileSync, existsSync, mkdirSync } from "fs";
+import path from "path";
 import { DateLocales, FileLogType } from "../types/generic.types";
 
 export default class FW
@@ -27,12 +28,9 @@ export default class FW
 
         if (!existsSync(this.logFilePath))
         {
-            const lastSlashIndex = this.logFilePath.lastIndexOf('/');
-
-            if (lastSlashIndex !== -1) {
-                const buildingDirs = this.logFilePath.substring(0, lastSlashIndex);
-                mkdirSync(buildingDirs, { recursive: true });
-            }
+            const fullPath = path.resolve(this.logFilePath);
+            const dir = path.dirname(fullPath);
+            if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
         }
 
         const date = this._getDateTimeString().trim();

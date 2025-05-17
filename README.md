@@ -2,7 +2,7 @@
 
 
 
-`v3.2.3`
+`v4.0.0`
 
 This is a package i made for myself but can surely be helpful to others, feel free to contribute if you like it.
 
@@ -21,50 +21,54 @@ You basically have the **Logger** class and the **FW** (filewriter) class.
 
 ## Logger Class
 
+> You can also import a `getStringedColor` function that simply returns you a colored string
+
 ```ts
 export interface ILogger {
     public static colors:Record<LogColors, string>;
     public static icons:Record<Icons, string>;
 
-    getStringedColor: (color:LogColors, message:any) => string;
-    ok: (message:string) => void;
-    nok: (message:string) => void;
+    ok(message:string): void;
+    nok(message:string): void;
+    fullOk(message:string): void;
+    fullNok(...errors:any[]): void;
 
-    color: ([LogColors | null, string], ...messages: string[]) => void;
-    base: (coloredMessage:any, ...messages:any[]) => void;
-    white: (coloredMessage:any, ...messages:any[]) => void;
-    green: (coloredMessage:any,...messages:any[]) => void;
-    red: (coloredMessage:any,...messages:any[]) => void;
-    yellow: (coloredMessage:any,...messages:any[]) => void;
-    blue: (coloredMessage:any,...messages:any[]) => void;
-    magenta: (coloredMessage:any,...messages:any[]) => void;
-    cyan: (coloredMessage:any,...messages:any[]) => void;
-    gray: (coloredMessage:any,...messages:any[]) => void;
-    orange: (coloredMessage:any,...messages:any[]) => void;
-    pink: (coloredMessage:any,...messages:any[]) => void;
-    purple: (coloredMessage:any,...messages:any[]) => void;
-    teal: (coloredMessage:any,...messages:any[]) => void;
-    brown: (coloredMessage:any,...messages:any[]) => void;
-    lime: (coloredMessage:any,...messages:any[]) => void;
-    gold: (coloredMessage:any,...messages:any[]) => void;
-    violet: (coloredMessage:any,...messages:any[]) => void;
+    base(coloredMessage:any, ...messages:any[]): void;
+    white(coloredMessage:any, ...messages:any[]): void;
+    green(coloredMessage:any,...messages:any[]): void;
+    red(coloredMessage:any,...messages:any[]): void;
+    yellow(coloredMessage:any,...messages:any[]): void;
+    blue(coloredMessage:any,...messages:any[]): void;
+    magenta(coloredMessage:any,...messages:any[]): void;
+    cyan(coloredMessage:any,...messages:any[]): void;
+    gray(coloredMessage:any,...messages:any[]): void;
+    orange(coloredMessage:any,...messages:any[]): void;
+    pink(coloredMessage:any,...messages:any[]): void;
+    purple(coloredMessage:any,...messages:any[]): void;
+    teal(coloredMessage:any,...messages:any[]): void;
+    brown(coloredMessage:any,...messages:any[]): void;
+    lime(coloredMessage:any,...messages:any[]): void;
+    gold(coloredMessage:any,...messages:any[]): void;
+    violet(coloredMessage:any,...messages:any[]): void;
 
-    logFile: (message:string, type?:"log" | "error") => void;
-    logDetail: (coloredMessage:any, ...messages:any[]) => void;
-    logError: (coloredMessage:any,...errs:any[]) => void;
+    combo(firstString:[LogColors, string] | string, ...messages: string[]): void;
+    file(message:string, type?:"log" | "error"): void;
+    detail(coloredMessage:any, ...messages:any[]): void;
+    error(coloredMessage:any,...errs:any[]): string | undefined;
+    date(color?:LogColors): string;
 }
 
 // --- Default constructor values
-private logFilePath:string = null!;
-private readonly isDebug:boolean = true;
+protected logFilePath:string = null!;
+protected readonly stopEveryLog:boolean = false;
 protected readonly dateLocale:DateLocales = "it-IT";
 protected readonly primaryColor:LogColors | null = null;
 protected readonly isErrorStackFull:boolean = false;
-protected readonly areIconsBeforeText:boolean = false;
+protected readonly areIconsBeforeText:boolean = true;
 
 export interface LoggerConstructor {
-    logFilePath?:string,
-    debug?:boolean,                 // if set to false, there won't be any more log.
+    logFilePath?:string,            // by calling the file() method and leaeving this undefined, there won't be any logs
+    stopEveryLog?:boolean,          // if set to true, there won't be any more log.
     locale?: DateLocales,           // to set the locale timezone view
     primaryColor?:LogColors,        // set your color for the "base" method. default is white
     isErrorStackFull?:boolean       // if set to true, logError will log the full stack trace
@@ -78,27 +82,36 @@ export interface LoggerConstructor {
 ## Initialize the class
 
 ```ts
-import { Logger } from "utils-logger-av"
+import { Logger, getStringedColor } from "utils-logger-av"
 ```
 
 You can export the default class like
 ```ts
 const log = new Logger({ primaryColor:"cyan" });
-export { log }
+const c = getStringedColor;
+const i = Logger.icons;
+export { c, i, log };
 ```
 
 
 Or creating a new class extending mine to add some custom utilities
 ```ts
-class MyLogger extends Logger
+class YourLogger extends Logger
 {
-    public baseFile = (message:any, type:FileLogType) => {
-        this.base(message);
-        this.logFile(message, type)
+    public yourCustomMethod = (message:any, type:FileLogType) => {
+        const finalMessage = "CUSTOM-METHOD: " + message;
+        this.base(finalMessage);
+        this.file(finalMessage, type)
+    }
+
+    override fullNok(...errs: any[]): void
+    {
+        this.detail("Overriding fullNok and printing filePath: ", this.logFilePath);
+        super.fullNok(...errs);
     }
 }
 
-const log = new MyLogger({ logFilePath: `${Configs.LOG_FOLDER}/logs.log` });
+const log = new YourLogger({ logFilePath: `${Configs.LOG_FOLDER}/logs.log` });
 const c = getStringedColor;
 const i = Logger.icons;
 export { c, i, log };

@@ -1,40 +1,57 @@
 // --- Logger
 export type FileLogType = "log" | "error";
 export type Icons =
-    | "check"          // ✅ Check verde (OK)
-    | "cross"          // ❌ Croce rossa (Errore)
-    | "warning"        // ⚠ Simbolo di avvertimento
-    | "info"           // ℹ Simbolo di informazione
-    | "refresh"        // 🔄 Aggiornamento o processo in corso
-    | "arrowRight"     // ➡ Freccia verso destra
-    | "arrowLeft"      // ⬅ Freccia verso sinistra
-    | "arrowUp"        // ⬆ Freccia verso l'alto
-    | "arrowDown"      // ⬇ Freccia verso il basso
-    | "doubleArrow"    // ↔ Freccia bidirezionale
-    | "star"           // ⭐ Stella
-    | "heart"          // ❤️ Cuore
-    | "fire"           // 🔥 Fuoco
-    | "lock"           // 🔒 Lucchetto
-    | "unlock"         // 🔓 Lucchetto aperto
-    | "hourglass"      // ⌛ Clessidra
-    | "hourglassFlow"  // ⏳ Clessidra con sabbia che scorre
-    | "rocket"         // 🚀 Razzo
-    | "party"          // 🎉 Party popper
-    | "search"         // 🔍 Lente di ingrandimento
-    | "trash"          // 🗑 Cestino
-    | "clip"           // 📎 Graffetta
-    | "bulb"           // 💡 Lampadina
-    | "checkBox"       // ☑ Casella selezionata
-    | "pencil"         // ✏ Matita
-    | "book"           // 📖 Libro
-    | "folder"         // 📂 Cartella
-    | "globe"          // 🌍 Globo (Europa/Africa)
-    | "globeAmericas"  // 🌎 Globo (Americhe)
-    | "globeAsia"      // 🌏 Globo (Asia/Australia)
-    | "cloud"          // ☁ Nuvola
-    | "sun"            // ☀ Sole
-    | "moon"           // 🌙 Luna
-    | "snowflake";     // ❄ Fiocco di neve
+  | 'check'
+  | 'cross'
+  | 'warning'
+  | 'info'
+  | 'refresh'
+  | 'arrowRight'
+  | 'arrowLeft'
+  | 'arrowUp'
+  | 'arrowDown'
+  | 'star'
+  | 'heart'
+  | 'fire'
+  | 'lock'
+  | 'unlock'
+  | 'hourglass'
+  | 'hourglassFlow'
+  | 'rocket'
+  | 'party'
+  | 'search'
+  | 'trash'
+  | 'clip'
+  | 'bulb'
+  | 'book'
+  | 'folder'
+  | 'globe'
+  | 'globeAmericas'
+  | 'globeAsia'
+  | 'cloud'
+  | 'sun'
+  | 'moon'
+  | 'snowflake'
+  | 'calendar'
+  | 'bell'
+  | 'email'
+  | 'phone'
+  | 'settings'
+  | 'user'
+  | 'users'
+  | 'home'
+  | 'clock'
+  | 'chart'
+  | 'money'
+  | 'thumbsUp'
+  | 'thumbsDown'
+  | 'camera'
+  | 'video'
+  | 'music'
+  | 'pin'
+  | 'tag'
+  | 'flag';
+
 
 export type LogColors =
     | "red"
@@ -55,7 +72,7 @@ export type LogColors =
 
 export interface LoggerConstructor {
     logFilePath?:string,
-    debug?:boolean,
+    stopEveryLog?:boolean,
     locale?: DateLocales,
     primaryColor?:LogColors,
     isErrorStackFull?:boolean,
